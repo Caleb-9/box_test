@@ -18,11 +18,13 @@
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d"); 
 
-	var box = {
-		size: 20,
-		color: "blue",
-		x: 100,
-		y: 50
+	function makingRect() {
+		return {
+			size: 20,
+			color: "blue",
+			x: 100,
+			y: 50
+		}
 	}
 
 	function drawRect() {
@@ -30,5 +32,8 @@
   		context.fillRect(box.x, box.y, box.size, box.size);
 	}
 
+	var box = makingRect();
+
+	makingRect();
 	drawRect();
 </script>
