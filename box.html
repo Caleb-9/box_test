@@ -20,6 +20,7 @@
 
 	var boxes = [];
 	var randomColor = ["blue", "green", "red", "cyan"];
+	var maxDuration = 75;
 	var maxSize = 40;
 
 	function randomNum(n) {
@@ -31,7 +32,14 @@
 			size: randomNum(maxSize) +10,
 			color: randomColor[randomNum(randomColor.length)],
 			x: randomNum(canvas.width - maxSize),
-			y: randomNum(canvas.height - maxSize)
+			y: randomNum(canvas.height - maxSize),
+			duration: randomNum(maxDuration) + 10
+		}
+	}
+
+	function reduceDuration() {
+		for (var i = 0; i < boxes.length; i++) {
+			boxes[i].duration--;
 		}
 	}
 
@@ -50,4 +58,6 @@
 
 	makingBoxes(3);
 	drawBoxes();
+	reduceDuration();
+	console.log(boxes);
 </script>
