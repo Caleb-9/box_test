@@ -19,7 +19,7 @@
 	var context = canvas.getContext("2d");
 
 	var boxes = [];
-
+	var randomColor = ["blue", "green", "red", "cyan"];
 	var maxSize = 40;
 
 	function randomNum(n) {
@@ -29,7 +29,7 @@
 	function makingBox() {
 		return {
 			size: randomNum(maxSize) +10,
-			color: "blue",
+			color: randomColor[randomNum(randomColor.length)],
 			x: randomNum(canvas.width - maxSize),
 			y: randomNum(canvas.height - maxSize)
 		}
