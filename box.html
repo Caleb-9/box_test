@@ -18,20 +18,20 @@
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
 
-	var boxes = [];
+	var circles = [];
 	var randomColor = ["blue", "green", "red", "cyan"];
 	
 	var gameSettings = {
 		maxSize: 60,
 		maxDuration: 75,
-		numberOfBoxes: 20
+		numberOfCircles: 20
 	}
 
 	function randomNum(n) {
 		return Math.floor(Math.random() *n);
 	}
 
-	function makingBox() {
+	function makingCircle() {
 		return {
 			x: randomNum(canvas.width - gameSettings.maxSize),
 			y: randomNum(canvas.height - gameSettings.maxSize),
@@ -42,36 +42,45 @@
 	}
 
 	function reduceDuration() {
- 		for (i = 0; i < boxes.length; i++) {
- 			boxes[i].duration--;
+ 		for (i = 0; i < circles.length; i++) {
+ 			circles[i].duration--;
 
-			if (boxes[i].duration <= 0) {
-				boxes[i] = makingBox();
+			if (circles[i].duration <= 0) {
+				circles[i] = makingCircle();
 			}
  		}
  	}
 
-	function makingBoxes(n) {
+	function makingCircles(n) {
 		for (var i = 0; i < n; i++) {
-			boxes.push(makingBox());
+			circles.push(makingCircle());
 		}
 	}
 
-	function drawBoxes() {
-		for (var i = 0; i < boxes.length; i++) {
-			context.fillStyle = boxes[i].color;
-  			context.fillRect(boxes[i].x, boxes[i].y, boxes[i].size, boxes[i].size);
+	function drawCircles() {
+		for (var i = 0; i < circles.length; i++) {
+			context.beginPath();
+			context.arc(
+				circles[i].x,
+				circles[i].y,
+				circles[i].size,
+				0,
+				2*Math.PI
+			);
+			context.fillStyle = circles[i].color;
+			context.fill();
+			context.stroke();
 		}
 	}
 
 	function playGame() {
 		context.clearRect(0, 0, canvas.width, canvas.height);
- 		drawBoxes();
+ 		drawCircles();
  		reduceDuration();
  		requestAnimationFrame(playGame);
 	}
 
-	makingBoxes(gameSettings.numberOfBoxes);
+	makingCircles(gameSettings.numberOfCircles);
 	playGame();
 
 </script>
